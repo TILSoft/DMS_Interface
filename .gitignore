@@ -1,0 +1,15 @@
+**/credentials.*
+~$*
+.*
+/venv/*
+!.gitignore
+!.pylintrc
+*.pyc
+*.pyo
+Pipfile.lock
+tempCodeRunner*
+/testdata/*
+**/instantclient_11_2/
+**/Untitled*
+**/__pycache__/
+log.txt

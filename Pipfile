@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+pandas = "*"
+numpy = "*"
+cx-oracle = "*"
+
+[requires]
+python_version = "3.6"
+
+[dev-packages]
+pylint = "*"
+notebook = "*"
+autopep8 = "*"
