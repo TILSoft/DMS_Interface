@@ -7,6 +7,8 @@ verify_ssl = true
 pandas = "*"
 numpy = "*"
 cx-oracle = "*"
+pyodbc = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.6"
@@ -15,3 +17,4 @@ python_version = "3.6"
 pylint = "*"
 notebook = "*"
 autopep8 = "*"
+jupyter = "*"
