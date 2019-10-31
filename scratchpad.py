@@ -5,3 +5,7 @@ df = get_po_qty(
 df
 
 #%%
+df_phases.loc[df_phases["Material"] == '6207943']
+
+
+#%%

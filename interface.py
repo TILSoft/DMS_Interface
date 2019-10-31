@@ -184,7 +184,7 @@ def get_operators(format):
     try:
         return df_format.loc[format, 'stdpersonnel']
     except:
-        return OPERATORS
+        return float(OPERATORS)
 
 
 # In[22]:
@@ -294,11 +294,11 @@ def xml_prep():
         if machine == -1:
             log_failure(row.activityid, 1, error_code)
             continue
-        setup = '0'
+        setup = 0
         operators = get_operators(format)
         if co == True:
-            setup = machine * operators
-            machine = '0'
+            setup = int(round(float(machine) * operators, 0))
+            machine = 0
         if phase == 0:
             log_failure(row.activityid, 3, error_code)
             continue
@@ -319,7 +319,7 @@ def xml_prep():
             # Labour always 0 for setup, ref email "DMS Order Confirmations - Alignment with Global Finance"
             n.append('0')
         else:
-            n.append(str(machine * operators))
+            n.append(str(int(round(float(machine) * operators, 0))))
         n.append(str(get_operators(format)))
         n.append(str(get_downtime(row.activityid)))
         po_details = get_po_details(po)
@@ -437,10 +437,11 @@ df_activities['postactivity'].fillna(value=0, axis='index', inplace=True)
 df_activities = df_activities.astype(dtype= {"postactivity": np.int64})
 df_format = pd.read_sql(sql_format, connection, index_col='formatid')
 xml_prep()
-#update_db(to_xml(df_xml))
-to_xml(df_xml)
+update_db(to_xml(df_xml))
+#to_xml(df_xml)
 connection.close()
 print('END OF SCRIPT')
 
 
 # In[ ]:
+
