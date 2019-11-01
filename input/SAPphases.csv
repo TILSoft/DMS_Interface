@@ -1315,3 +1315,5 @@ Material,Stage,Description,SAP Workcentre,DMS Workcentre,Phase
 6224092,Operation,BL4 Packaging,BL4,BL4,30
 6224093,Setup,BL4 Packaging,BL4,BL4,20
 6224093,Operation,BL4 Packaging,BL4,BL4,30
+6210150,Setup,BL2 Packaging,BL2,BL2,20
+6210150,Operation,BL2 Packaging,BL2,BL2,30
