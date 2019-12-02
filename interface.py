@@ -76,7 +76,10 @@ def get_po_details(po):
         elif defaultType == cx_Oracle.BLOB:
             return cursor.var(cx_Oracle.LONG_BINARY, arraysize=cursor.arraysize)
 
-    query = "select quantiteof as qty, uniteof as unit from elan2406PRD.xfp_ofentete where numof = '{}'".format(po)
+    query = """select * from (select quantiteof as qty, uniteof as unit from elan2406PRD.xfp_ofentete where numof = '{}'
+                union
+               select quantiteof as qty, uniteof as unit from arch2406PRD.xfp_ofentete where numof = '{}')
+                where ROWNUM = 1""".format(po,po)
 
     try:
         connection_string = cx_Oracle.makedsn(DB_XFP_IP,  DB_XFP_PORT, DB_XFP_SID)
