@@ -24,6 +24,8 @@ PASSWORD = os.environ['PASSWORD']
 ACTIVITY_TABLE = os.environ['ACTIVITY_TABLE']
 XML_PATH = os.environ['XML_PATH']
 XML_PATH_ARCHIVE = os.environ['XML_PATH_ARCHIVE']
+TED_PATH = os.environ['TED_PATH']
+TED_PATH_ARCHIVE = os.environ['TED_PATH_ARCHIVE']
 PHASES = os.environ['PHASES']
 OPERATORS = os.environ['OPERATORS']
 PLANT = os.environ['PLANT']
@@ -253,7 +255,7 @@ def log_failure(activity, step, error_code):
         else:
             message = "Process order number not found"
     elif step == 3:
-        message = "SAP phase not found, contact ISIT"
+        message = "SAP phase not found, contact IT"
 
     sql = """UPDATE {}.{}
                  SET status = '{}'
@@ -390,6 +392,30 @@ def save_xml_file(xml):
         success = False
     return success
 
+# %%
+# Save CSV file for the TED 2.0 project
+def to_csv(df_xml):
+    df = df_xml
+    df["Time_unit"] = "MIN"
+    file_content = df.to_csv(index=False, line_terminator='\n')
+    success = True
+    now = datetime.datetime.now()
+    filename = "TPIE_DMS_TED{}-{}-{}.csv".format(now.strftime(
+        '%Y%m%d'), now.strftime('%H%M%S'), now.strftime('%f')[:-3])
+    filenamesap = TED_PATH + '\\' + filename
+    filenamearch = TED_PATH_ARCHIVE + '\\' + filename
+    try:
+        if not os.path.exists(TED_PATH):
+            os.makedirs(TED_PATH)
+        if not os.path.exists(TED_PATH_ARCHIVE):
+            os.makedirs(TED_PATH_ARCHIVE)
+        with open(filenamesap, 'w') as f:
+            f.write(file_content)
+        with open(filenamearch, 'w') as f:
+            f.write(file_content)
+    except:
+        success = False
+    return success
 
 # In[29]:
 
@@ -442,9 +468,8 @@ df_format = pd.read_sql(sql_format, connection, index_col='formatid')
 xml_prep()
 update_db(to_xml(df_xml))
 #to_xml(df_xml)
+to_csv(df_xml) # to TED
 connection.close()
 print('END OF SCRIPT')
 
-
-# In[ ]:
-
+# %%
