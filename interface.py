@@ -397,7 +397,7 @@ def save_xml_file(xml):
 def to_csv(df_xml):
     df = df_xml
     df["Time_unit"] = "MIN"
-    file_content = df.to_csv(index=False, line_terminator='\n')
+    file_content = df.to_csv(index=False, sep='^', line_terminator='\n')
     success = True
     now = datetime.datetime.now()
     filename = "TPIE_DMS_TED{}-{}-{}.csv".format(now.strftime(
