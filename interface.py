@@ -468,7 +468,8 @@ df_format = pd.read_sql(sql_format, connection, index_col='formatid')
 xml_prep()
 update_db(to_xml(df_xml))
 #to_xml(df_xml)
-to_csv(df_xml) # to TED
+if not df_xml.empty:
+    to_csv(df_xml) # to TED
 connection.close()
 print('END OF SCRIPT')
 
