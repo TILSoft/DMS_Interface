@@ -400,7 +400,7 @@ def to_csv(df_xml):
     file_content = df.to_csv(index=False, sep='^', line_terminator='\n')
     success = True
     now = datetime.datetime.now()
-    filename = "TPIE_DMS_TED{}-{}-{}.csv".format(now.strftime(
+    filename = "TPIE_DMS_PC{}-{}-{}.csv".format(now.strftime(
         '%Y%m%d'), now.strftime('%H%M%S'), now.strftime('%f')[:-3])
     filenamesap = TED_PATH + '\\' + filename
     filenamearch = TED_PATH_ARCHIVE + '\\' + filename
